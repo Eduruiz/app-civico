@@ -1,0 +1,96 @@
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500|Roboto+Mono:500,700");
+
+:root {
+    --color-main: #4d4841;
+    --color-secondary: #4d4841;
+    --color-black: #000;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.4;
+    font-size: 18px;
+    color: rgba(0, 0, 0, .84);
+}
+
+ul {
+    list-style: none;
+}
+
+ul li {
+    margin-bottom: 20px;
+}
+
+.search-box {
+    display: grid;
+    justify-items: center;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+.search-box__main-title {
+    text-transform: uppercase;
+    font-size: 2em;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.search-box__search-form {
+    padding: 0 35px;
+}
+
+.search-box__search-form select {
+    min-width: 400px;
+    padding: 10px 15px;
+    border: none;
+    background: var(--color-main);
+    text-align: center;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.search-box__results {
+    font-weight: 400;
+}
+
+.search-box__results h1,
+.search-box__results h2,
+.search-box__results h3,
+.search-box__results h4
+{
+    margin: 1em 0;
+    font-weight: 400;
+    font-size: 1.3rem;
+}
+
+.search-box__results h1 {
+    font-size: 1.4rem;
+}
+
+.search-box article {
+    overflow: hidden;
+    margin: 30px 35px;
+    padding: 0 35px 50px;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+progress {
+    text-align: center;
+    display: flex;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+}
+
+
+progress:before {
+    content: attr(data-label);
+}
