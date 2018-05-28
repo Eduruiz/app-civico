@@ -1,4 +1,6 @@
 (function(window, document) {
+    'use strict';
+
     fetchDistricts();
 
     const $districts = document.querySelector('[data-id="districts"]');
@@ -17,18 +19,20 @@
             return response.json();
         })
         .then(function(goalsJSON) {
-            goals = goalsJSON.goals;
+            const goals = goalsJSON.goals;
 
             goals.forEach(function(item, index) {
                 // I don't get exactly why the api is sending more than 100
                 // as % answer, so I assumed it's a bug and adjusted it here.
                 item.percentage.owned > 100 ? item.percentage.owned = 100 : '';
+                // Transforming the expected_budget in a more readable currency
+                item.expected_budget = Number(item.expected_budget).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
                 const $result = `
                     <article>
                         <h2>META: ${item.name}</h2>
-                        <h3>${item.description}</h2>
-                        <span>Orçamento Esperado: R$${numberToBrl(item.expected_budget)}</span>
+                        <h3>${item.description}</h3>
+                        <span>Orçamento Esperado: ${item.expected_budget}</span>
 
                         <div class="dates">
                             ${item.expected_start_date !== null ?
@@ -108,10 +112,5 @@
 
     function clearResults() {
         document.querySelector('[data-js="results"]').innerHTML = '';
-    }
-
-    function numberToBrl(n, c, d, t) {
-        c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "", i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
-        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
     }
 }(window, document));
