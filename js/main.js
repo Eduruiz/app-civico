@@ -5,7 +5,7 @@
 
     const $districts = document.querySelector('[data-id="districts"]');
 
-    $districts.addEventListener('change', () => {
+    $districts.addEventListener('change', function(){
         const id = this.options[this.selectedIndex].dataset.id;
         clearResults();
         fetchGoals(id);
