@@ -21,7 +21,7 @@
         .then(goalsJSON => {
             const goals = goalsJSON.goals;
 
-            goals.forEach((item, index) => {
+            goals.forEach((item) => {
                 // I don't get exactly why the api is sending more than 100
                 // as % answer, so I assumed it's a bug and adjusted it here.
                 item.percentage.owned > 100 ? item.percentage.owned = 100 : '';
@@ -97,10 +97,9 @@
         )
         .then(districtsJSON => {
             const districts = districtsJSON.districts;
-            const $option = document.createElement('option');
             const $districts = document.querySelector('[data-id="districts"]');
 
-            districts.forEach((item, index) => {
+            districts.forEach((item) => {
                 const $option = `<option data-id="${item.id}">${item.name}</option>`
                 $districts.insertAdjacentHTML('beforeend', $option);
             })
