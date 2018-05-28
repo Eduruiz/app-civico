@@ -5,7 +5,7 @@
 
     const $districts = document.querySelector('[data-id="districts"]');
 
-    $districts.addEventListener('change', function(){
+    $districts.addEventListener('change', () => {
         const id = this.options[this.selectedIndex].dataset.id;
         clearResults();
         fetchGoals(id);
@@ -15,13 +15,13 @@
         const $results = document.querySelector('[data-js="results"]');
 
         fetch('http://2013.deolhonasmetas.org.br/api/public/goals?region_id=' + id)
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(goalsJSON) {
+        .then(response =>
+            response.json()
+        )
+        .then(goalsJSON => {
             const goals = goalsJSON.goals;
 
-            goals.forEach(function(item, index) {
+            goals.forEach((item, index) => {
                 // I don't get exactly why the api is sending more than 100
                 // as % answer, so I assumed it's a bug and adjusted it here.
                 item.percentage.owned > 100 ? item.percentage.owned = 100 : '';
@@ -92,20 +92,20 @@
 
     function fetchDistricts() {
         fetch('http://2013.deolhonasmetas.org.br/api/public/districts')
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(districtsJSON) {
+        .then(response =>
+            response.json()
+        )
+        .then(districtsJSON => {
             const districts = districtsJSON.districts;
             const $option = document.createElement('option');
             const $districts = document.querySelector('[data-id="districts"]');
 
-            districts.forEach(function(item, index){
+            districts.forEach((item, index) => {
                 const $option = `<option data-id="${item.id}">${item.name}</option>`
                 $districts.insertAdjacentHTML('beforeend', $option);
             })
         })
-        .then(function(){
+        .then(() => {
             document.querySelector('[data-js="loading"]').textContent = 'Escolha o Distrito';
         });
     }
